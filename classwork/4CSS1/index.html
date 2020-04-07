@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS1 | Webshop. Selling food</title>
+    <style>
+        .available-in-region {
+            color: green;
+            background-color: lightblue;
+        }
+    </style>
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="header">
+        <span class="logos">
+            <img class="main-logo" src="../1HTML1/foto.jpg" alt="Best food in USA logo">
+        </span>
+        <span class="header-main-menu">Menu items</span>
+        <span>social icons, logo</span>
+    </div>
+    <div class="main-content">
+        <p style="color: firebrick; background-color: red;">My first paragraph</p>
+        <p class="available-in-region border-red">
+            <!-- Padarykite taip, kad USA butu nuoroda ir teksto spalva butu juoda -->
+            This item is available only in <a href="#">USA</a>.
+        </p>
+        <p id="warning-message" class="border-red">
+            Alert! You will be deleted.
+        </p>
+        <p><a href="https://www.google.lt/test" target="_blank">Get</a> discount code.</p>
+    </div>
+    <div id="footer">
+        Contacts, copyright, newsletter
+    </div>
+</body>
+</html>

@@ -16,9 +16,9 @@
         <hr>
 
         <ol id="numbers-plate-list">
-            <li>JTJ111</li>
+            <li id="jtj111">JTJ111</li>
         </ol>
-        <input type="text" id="numbers">
+        <input type="text" id="numbers" autofocus>
         <button onclick="addItem();">Add new car lisence plate</button>
         <button onclick="removeItem();">Delete item</button>
 
@@ -36,24 +36,7 @@
         var newLisencePlate = ''; //string
         var counterOfPrompt = 0;
         var carsList = ['JJT112', 'ASD123'];
-        var mainData = {
-            clientData: {
-                name: {
-                    firstName: 'Lina',
-                    lastName: 'Linaite'
-                },
-                email: 'happy-client@hotmail.com',
-                car: {
-                    model: '',
-                    vehicleType: 'B',
-                    lisencePlateNumber: 'none'
-                }
-            },
-            adminData: {
-                name: 'Zilvinas',
-                email: 'zilvinasvcs@gmail.com'
-            }
-        };
+
 
         /* ACTION / EDITING / ASSIGNING / FUNCTIONS / CALCULATION */
         //alert(mainData.clientData.name.firstName);
@@ -63,16 +46,26 @@
         function addItem() {
             var numbersList = document.getElementById('numbers-plate-list');
             var inputElement = document.getElementById('numbers');
-            var inputValue = inputElement.value;
-            var newItemLi = document.createElement('li'); //exptexted <li>inside is Child</li>
-            // id?
-            newItemLi.appendChild(document.createTextNode(inputValue));
-            numbersList.appendChild(newItemLi);
+            var inputValue = inputElement.value.toUpperCase();
+            var isItem = document.getElementById(inputValue);
+            if (!isItem) {
+                var newItemLi = document.createElement('li'); //exptexted <li>inside is Child</li>
+                newItemLi.setAttribute('id', inputValue);
+                newItemLi.appendChild(document.createTextNode(inputValue));
+                numbersList.appendChild(newItemLi);
+            }
             inputElement.value = '';
         }
 
         function removeItem() {
-
+            var numbersList = document.getElementById('numbers-plate-list');
+            var inputElement = document.getElementById('numbers');
+            var inputValue = inputElement.value.toUpperCase();
+            var itemToDelete = document.getElementById(inputValue);
+            if (itemToDelete) {
+                inputElement.value = '';
+                numbersList.removeChild(itemToDelete);
+            }
         }
 
         if ((carTotal - carsReserved) > 0) {

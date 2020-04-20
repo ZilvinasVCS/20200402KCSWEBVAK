@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>error message | 10JQ1</title>
+    <style>
+        .error-message {
+            /* better option
+            display: none; */
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+</head>
+
+<body>
+    <div class="error-message">
+        ERROR ERROR, can't buy Your item
+    </div>
+    <button id="show-error">ADD TO CART</button>
+    <script>
+    // atlikti:
+        /*
+          1. paslepti klaidos pranesimo teksta / div'a. .hide() || .fadeOut()
+          2. paspaudus mygtuką paslėpti mygtuką
+          3. paspaudus mygtuka taip pat pradeti rodyti klaidos pranešimą.
+        */
+        $(document).ready(function () {
+
+            // 1. uzduotis
+            $('.error-message').fadeOut(3000);
+
+
+            $('#show-error').click(function () {
+                // 2. uzduotis
+                $('#show-error').fadeOut(5000, function () {
+                    console.log('button is successfully hidden');
+                });
+
+                // 3. uzduotis
+                $('.error-message').show();
+            });
+
+        });
+
+    </script>
+</body>
+</html>

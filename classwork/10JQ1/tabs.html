@@ -4,6 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>tabs | 10JQ1</title>
+    <style>
+        .active {
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 </head>
 
 <body>
@@ -16,6 +23,7 @@
         </div>
         <div class="tab-content" id="tab1">
             <h2>Something about product</h2>
+            <a href="https://www.google.lt">google</a>
         </div>
         <div class="tab-content" id="tab2">
             <h2>Dimensions</h2>
@@ -27,13 +35,37 @@
     <script>
     // atlikti:
         /*
-            1. pagal nutylejima paslepti visus tab'us
-            2. Rodyti tik pirmaji tab'a
-            3. indikuoti kad pirmas tab'as aktyvus
+            1. pagal nutylejima paslepti visus tab'us (jQuery funkcija .hide())
+            2. Rodyti tik pirmaji tab'a (su funkcija .fadeIn())
+            3. indikuoti kad pirmas tab'as aktyvus (pries tai visiems istrynus active klase)
             4. paspaudus kita taba paslepti visus tabus turini.
             5. rodyti tik pasirinkta / paspausta tab'a + jo turini.
-            6. isjungti standartini narsykles veiksma (click'ui)
+            6. isjungti standartini narsykles veiksma (click'ui). preventDefault(e)
         */
+        $(document).ready(function () {
+            // 1. uzduotis
+            $('.tab-content').hide();
+
+            // 2. uzduotis
+            $('.tab-content:first').fadeIn(3000);
+
+            // 3. uzduotis
+            $('.tabs > a:first').addClass('active');
+
+            $('.tabs > a').click(function () {
+                var $clickedItem = $(this).attr('href');
+                console.log($clickedItem);
+
+                // 4. paslepti tabus
+                $('.tab-content').hide();
+
+                // 5. rodyti tik pasirinkto tabo turini
+                $($clickedItem).show();
+                $('.tabs > a').removeClass('active');
+                $('.tabs > a[href="' + $clickedItem + '"]').addClass('active');
+
+            });
+        });
     </script>
 </body>
 </html>

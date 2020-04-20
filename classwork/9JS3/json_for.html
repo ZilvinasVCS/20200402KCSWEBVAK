@@ -9,14 +9,14 @@
 <body>
     <div id="cars-list"></div>
     <script>
-        var mainData = {
+        var mainData = [{
             clientData: {
-                name: {
+                name: [{
                     firstName: 'Lina',
                     lastName: 'Linaite'
-                },
+                }],
                 email: 'happy-client@hotmail.com',
-                cars: {
+                cars: [{
                     car: {
                         model: 'Ford',
                         vehicleType: 'C',
@@ -32,19 +32,18 @@
                         vehicleType: 'B',
                         lisencePlateNumber: 'none'
                     }
-                }
+                }]
             },
             adminData: {
                 name: 'Zilvinas',
                 email: 'zilvinasvcs@gmail.com'
             }
-        };
+        }];
 
-        console.log(mainData.clientData.cars);
 
         function printAllClientCars() {
-            for (var i = 0; i < mainData.clientData.cars.length; i++ ) {
-                console.log(mainData.clientData.cars);
+            for (var i = 0; i < mainData.length; i++ ) {
+                console.log(mainData.clientData.cars.car);
             }
         }
 

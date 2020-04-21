@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX | 11JQ2</title>
+</head>
+
+<body>
+
+    <h1>Duomenys apie Korona atvejus Lietuvoje realiu laiku</h1>
+    <button>Get data</button>
+    <div id="data">
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('button').click(function () {
+                var $outData = $('#data');
+                var ajaxUrl = 'https://api.covid19api.com/summary';
+
+                $outData.html('Minutėle. Duomenys siunčiami...');
+
+                $.ajax(
+                    {
+                        type: 'GET',
+                        url: ajaxUrl,
+                        success: function (result) {
+                            console.log(result.Countries[0].Country);
+
+                            var output = '<table><tr><th>Duomens pavadinimas</th><th>Duomenys</th></tr>';
+
+                            for (var i in result.Countries) {
+                                let countryName = result.Countries[i].Country;
+                                let countryCode = result.Countries[i].CountryCode;
+                                let slug = result.Countries[i].Slug;
+                                let newConfirmed = result.Countries[i].NewConfirmed;
+                                let totalConfirmed = result.Countries[i].TotalConfirmed;
+                                let newDeaths = result.Countries[i].NewDeaths;
+                                let totalDeaths = result.Countries[i].TotalDeaths;
+                                let newRecovered = result.Countries[i].NewRecovered;
+                                let totalRecovered = result.Countries[i].TotalRecovered;
+                                let dateOfDataRefreshed = result.Countries[i].Date;
+
+                                if (countryName == 'Lithuania') {
+                                    output += '<tr><td>Šalis</td><td>' + countryName + '</td></tr>';
+                                    output += '<tr><td>Šalies inicialai</td><td>' + countryCode + '</td></tr>';
+                                    output += '<tr><td>Šalies trumpinys</td><td>' + slug + '</td></tr>';
+                                    output += '<tr><td>Naujų užsikrėtimų</td><td>' + newConfirmed + '</td></tr>';
+                                    output += '<tr><td>Iš viso užsikrėtusiųjų</td><td>' + totalConfirmed + '</td></tr>';
+                                    output += '<tr><td>Naujų mirčių</td><td>' + newDeaths + '</td></tr>';
+                                    output += '<tr><td>Iš viso mirčių</td><td>' + totalDeaths + '</td></tr>';
+                                    output += '<tr><td>Nauji išgiję atvejai</td><td>' + newRecovered + '</td></tr>';
+                                    output += '<tr><td>Iš viso pagijusiųjų</td><td>' + totalRecovered + '</td></tr>';
+                                    output += '<tr><td>Duomenų atnaujinimo data</td><td>' + dateOfDataRefreshed + '</td></tr>';
+                                }
+                            }
+
+                            output += '</table>'
+
+                            $outData.html(output);
+                        }
+                    }
+                );
+            });
+        });
+    </script>
+</body>
+</html>

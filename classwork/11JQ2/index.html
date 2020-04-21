@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To do list | 11JQ2</title>
+</head>
+
+<body>
+
+    <div>
+        <input type="text" name="to-do-new-item-input">
+        <input type="button" value="Add new item">
+        <!-- <button></button> -->
+        <p>To do list:</p>
+        <ol>
+            <li>Eat</li>
+            <li>Sleep</li>
+        </ol>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var $newListItemLi, $inputValue; //type UNDEFINED
+            var $inputElement = $('input:text');
+
+
+            function addNewItem() {
+                let $tempInputValue = $inputElement.val();
+                $newListItemLi = $('<li></li>');
+                $newListItemLi.append($tempInputValue); // expected value <li>TEXT</li>
+                $('ol').append($newListItemLi);
+                $inputElement.val('');
+            }
+
+            function logSomethingIntoConsole(whatToPrint) {
+                console.log(whatToPrint);
+            }
+
+            $('input:button').on('click', function () {
+                addNewItem();
+                logSomethingIntoConsole($tempInputValue); // error cause let is destroyed.
+            })
+        });
+    </script>
+</body>
+</html>

@@ -1,7 +1,4 @@
 <?php
-    // create new class Product
-    // private connection, tableName
-    // all columns name will be public properties
 
 class Product {
     private $connection;
@@ -22,36 +19,6 @@ class Product {
 
     public function create()
     {
-        //query, bind/prepare, execute
-        $query = "INSERT INTO ";
-    }
-}
-
-<?php
-    // create new class Product
-    // private connection, tableName
-    // all columns name will be public properties
-
-class Product {
-    private $connection;
-    // TODO: move to env.php
-    private $tableName = "products";
-
-    public $id;
-    public $name;
-    public $price;
-    public $description;
-    public $category_id;
-    public $timestamp;
-
-    public function __construct($db)
-    {
-        $this->connection = $db;
-    }
-
-    public function create()
-    {
-        //query, bind/prepare, execute
         $query = "INSERT INTO " . $this->tableName . "
                     SET name=:name, description=:description, price=:price, category_id=:category_id, created=:created";
         $stmt = $this->connection->prepare($query);
@@ -75,5 +42,20 @@ class Product {
             return false;
         }
     }
-}
 
+    public function readAll()
+    {
+        $query = "SELECT
+                    id, name, description, price, category_id
+                FROM
+                    " . $this->tableName . "
+                    ORDER BY
+                        created DESC
+                    LIMIT
+                        0,10";
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute();
+
+        return $stmt;
+    }
+}

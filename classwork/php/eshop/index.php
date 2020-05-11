@@ -1,10 +1,6 @@
 <?php
 
-// default settings
-// TODO: move settings to config/env.php file
-$page = isset($_GET['page']) ? $_GET['page'] : 1;
-
-// rows per page setting
+include_once 'config/env.php';
 
 include_once 'config/database.php';
 $database = new Database();
@@ -12,7 +8,7 @@ $db = $database->getConnection();
 
 include_once 'objects/product.php';
 $product = new Product($db);
-$stmt = $product->readAll();
+$stmt = $product->readAll($fromNumCalc, $itemsPerPage);
 $numbersOfRowsInDatabase = $stmt->rowCount();
 
 include_once 'objects/category.php';
@@ -49,12 +45,20 @@ echo "<div class='right-button'>
                     echo $category->name;
                 echo "</td>";
 
-                echo "<td>read one item, edit/update, delete</td>";
+                echo "<td>
+                        <a href='#' class='btn btn-primary'>Read item</a>
+                        <a href='#' class='btn btn-info'>Edit item</a>
+                        <a href='#' class='btn btn-danger'>Delete item</a>
+                    </td>";
 
             echo "</tr>";
         } ?>
 </table>
 <?php
+    $totalItems = $product->countAll();
+
+    include_once 'pagination.php';
+
     } else {
         echo "<div class='alert alert-info'>No products in database.</div>";
     }

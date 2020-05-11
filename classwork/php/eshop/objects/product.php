@@ -43,7 +43,7 @@ class Product {
         }
     }
 
-    public function readAll()
+    public function readAll($fromNum, $tillNum)
     {
         $query = "SELECT
                     id, name, description, price, category_id
@@ -52,10 +52,25 @@ class Product {
                     ORDER BY
                         created DESC
                     LIMIT
-                        0,10";
+                        {$fromNum},{$tillNum}";
         $stmt = $this->connection->prepare($query);
         $stmt->execute();
 
         return $stmt;
     }
+
+    // create new method countAll() which returns rowCount() / fetchColumn() value
+    public function countAll()
+    {
+        $query = "SELECT id FROM " . $this->tableName;
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute();
+        $res = $stmt->rowCount();
+
+        return $res;
+
+    }
+    // include pagination.php file in index.php
+    // call this method in pagination.php
+
 }

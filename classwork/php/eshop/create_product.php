@@ -53,7 +53,7 @@
             <?php
                 include_once 'objects/category.php';
                 $category = new Category($db);
-                $stmt = $category->read();
+                $stmt = $category->readAll();
 
                 echo "<select class='form-control' name='category_id'>";
                     echo "<option>Choose category</option>";

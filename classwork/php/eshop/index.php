@@ -44,10 +44,10 @@ echo "<div class='right-button'>
                     $category->readName();
                     echo $category->name;
                 echo "</td>";
-
+             
                 echo "<td>
                         <a href='read_item.php?id={$id}' class='btn btn-primary'>Read item</a>
-                        <a href='#' class='btn btn-info'>Edit item</a>
+                        <a href='update_item.php?id={$id}' class='btn btn-info'>Edit item</a>
                         <a href='#' class='btn btn-danger'>Delete item</a>
                     </td>";
 
@@ -55,10 +55,10 @@ echo "<div class='right-button'>
         } ?>
 </table>
 <?php
-
+    
     $pageUrl = "index.php?";
     $totalItems = $product->countAll();
-
+        
     include_once 'pagination.php';
 
     } else {

@@ -124,4 +124,17 @@ class Product {
         
         return false;
     }
+
+    public function deleteItem()
+    {
+        $query = "DELETE FROM {$this->tableName} WHERE id = ?";
+        $stmt = $this->connection->prepare($query);
+        $stmt->bindParam(1, $this->id);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+
+        return false;
+    }
 }

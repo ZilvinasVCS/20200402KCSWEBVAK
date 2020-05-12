@@ -16,8 +16,12 @@ include_once 'objects/category.php';
 $category = new Category($db);
 $stmt = $category->readAll();
 
-$pageTitle = "Read item ";
+$pageTitle = "Update item";
 include_once "layout_header.php";
+
+echo "<div class='right-button-margin'>
+            <a href='index.php' class='btn btn-default pull-right'>All products list</a>
+        </div>";
 
 
 // validate form on SUBMIT / $_POST

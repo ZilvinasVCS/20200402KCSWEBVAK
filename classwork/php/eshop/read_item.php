@@ -9,40 +9,54 @@ $db = $database->getConnection();
 
 include_once 'objects/product.php';
 $product = new Product($db);
+$product->id = $id;
+$product->readItem();
 
 include_once 'objects/category.php';
 $category = new Category($db);
-//sukurti objektus: database, product, category
+$stmt = $category->readAll();
 
-$pageTitle = "Read item ";
+$pageTitle = "Read item";
 include_once "layout_header.php";
-$product->id = $id;
-$product->readItem();
+
+echo "<div class='right-button-margin'>
+            <a href='index.php' class='btn btn-default pull-right'>All products list</a>
+        </div>";
 ?>
-<form>
-    <table class='table table-hover table-responsive table-bordered'>
-        <tr>
-            <td>Name</td>
-            <td><input name="name" value="<?php echo $product->name; ?>"></td>
-        </tr>
-        <tr>
-            <td>Description</td>
-            <td><input name="name" value="<?php echo $product->description; ?>"></td>
-        </tr>
-        <tr>
-            <td>Price</td>
-            <td><input name="name" value="<?php echo $product->price; ?>"></td>
-        </tr>
-        <tr>
-            <td>Category</td>
-            <td><!-- dropdown select tag --></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><button type="submit" class="btn btn-primary">Update</button></td>
-        </tr>
-    </table>
-</form>
+<table class='table table-hover table-responsive table-bordered'>
+    <tr>
+        <td>Name</td>
+        <td><?php echo $product->name; ?></td>
+    </tr>
+    <tr>
+        <td>Description</td>
+        <td><?php echo $product->description; ?></td>
+    </tr>
+    <tr>
+        <td>Price</td>
+        <td><?php echo $product->price; ?></td>
+    </tr>
+    <tr>
+        <td>Category</td>
+        <td>
+            <?php
+                if ($product->category_id == 0) {
+                    echo 'Undefined';
+                    exit();
+                } else {
+                    while ($rowCategory = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        extract($rowCategory);
+
+                        if ($product->category_id == $id) {
+                            echo $name;
+                            break;
+                        }
+                    }
+                }
+            ?>
+        </td>
+    </tr>
+</table>
 
 <?php
 include_once "layout_footer.php";

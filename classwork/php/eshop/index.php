@@ -48,7 +48,7 @@ echo "<div class='right-button'>
                 echo "<td>
                         <a href='read_item.php?id={$id}' class='btn btn-primary'>Read item</a>
                         <a href='update_item.php?id={$id}' class='btn btn-info'>Edit item</a>
-                        <a href='#' class='btn btn-danger'>Delete item</a>
+                        <a data-item-id='{$id}' class='btn btn-danger delete-item'>Delete item</a>
                     </td>";
 
             echo "</tr>";

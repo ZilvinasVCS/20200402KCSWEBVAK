@@ -137,4 +137,31 @@ class Product {
 
         return false;
     }
+
+    public function search($searchWord = 'pho')
+    {
+        $query = "SELECT
+                    cat.name as category_name, prod.id, prod.name, prod.description, prod.price, prod.category_id, prod.created
+                FROM
+                   {$this->tableName} prod
+                   LEFT JOIN
+                        categories cat
+                    ON
+                        prod.category_id = cat.id
+                    WHERE
+                        prod.name LIKE ? OR prod.description LIKE ?
+                    ORDER BY
+                        prod.name ASC
+                    LIMIT
+                        0, 20";
+        $preparedSearchWordForSqlQuery = "%{$searchWord}%";
+
+        $stmt = $this->connection->prepare($query);
+        $stmt->bindParam(1, $preparedSearchWordForSqlQuery);
+        $stmt->bindParam(2, $preparedSearchWordForSqlQuery);
+
+        $stmt->execute();
+
+        return $stmt;
+    }
 }

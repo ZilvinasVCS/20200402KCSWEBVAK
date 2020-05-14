@@ -17,12 +17,21 @@ $category = new Category($db);
 
 $pageTitle = "Our producs";
 include_once "layout_header.php";
+?>
 
+<div class="flex-container">
+    <span class="right-button">
+        <a href="create_product.php" class="btn btn-primary">Create product</a>
+        </span>
+    <span>
+        <form action="<?php echo "search.php" ?>" method="get">
+            <input name="q">
+            <input type="submit" value="Search">
+        </form>
+    </span>
+</div>
 
-echo "<div class='right-button'>
-        <a href='create_product.php' class='btn btn-primary'>Create product</a>
-        </div>";
-
+<?php
     if ($numbersOfRowsInDatabase > 0) {
 ?>
 <table class='table table-hover table-responsive table-bordered'>

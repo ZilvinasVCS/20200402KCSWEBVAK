@@ -1,1 +1,5 @@
 /* custom CSS styles */
+.flex-container {
+    display: flex;
+    flex-direction: row;
+}
